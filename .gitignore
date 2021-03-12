@@ -89,3 +89,10 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
