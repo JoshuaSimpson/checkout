@@ -1,8 +1,6 @@
-# frontend
+# Checkout App
 
 ## Project setup
-
-
 
 ```
 npm install

@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   frontend:
-    container_name: checkout-frontend
+    container_name: frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -15,7 +15,7 @@ services:
       - VUE_APP_API_URL=http://localhost:3000
 
   backend:
-    container_name: checkout-backend
+    container_name: backend
     build:
       context: ./backend
       dockerfile: Dockerfile
