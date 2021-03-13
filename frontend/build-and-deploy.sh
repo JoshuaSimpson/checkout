@@ -25,3 +25,4 @@ npm run build
 
 aws s3 sync dist/ s3://"$TARGET_BUCKET" --delete --acl public-read
 INVALIDATION_RESULT=$(aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION --paths "/*")
+echo $INVALIDATION_RESULT

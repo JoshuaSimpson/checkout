@@ -15,6 +15,7 @@ if (process.env.ENVIRONMENT === 'local' || process.env.ENVIRONMENT === 'intervie
 }
 
 app.get('/', (req, res) => {
+  console.log('this is a change');
   let time = Date.now().toString();
   res.send(JSON.stringify({ name, time }));
 })
