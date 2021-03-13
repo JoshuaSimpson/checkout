@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "${var.subdomain}.${var.root_domain}"
+  domain_name       = "${var.subdomain}-${var.environment}.${var.root_domain}"
   validation_method = "DNS"
 }
 

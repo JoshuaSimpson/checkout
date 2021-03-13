@@ -4,7 +4,7 @@ const port = 3000
 
 const name = 'Josh';
 
-if (process.env.ENVIRONMENT === 'local') {
+if (process.env.ENVIRONMENT === 'local' || process.env.ENVIRONMENT === 'interview') {
   try {
     const cors = require('cors');
     app.use(cors());
@@ -15,7 +15,6 @@ if (process.env.ENVIRONMENT === 'local') {
 }
 
 app.get('/', (req, res) => {
-  console.log('hits');
   res.send(JSON.stringify({ name }));
 })
 

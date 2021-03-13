@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}, with thanks from {{ name }} to the Vue bootstrapper</h1>
+    <h1>
+      {{ msg }}, with thanks from {{ name }} to the Vue bootstrapper at
+      {{ time }}
+    </h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
@@ -94,15 +97,17 @@ export default {
   data() {
     return {
       name: "null",
+      time: "null",
     };
   },
   props: {
     msg: String,
   },
   mounted() {
-    axios
-      .get(process.env.VUE_APP_API_URL)
-      .then((response) => (this.name = response.data.name));
+    axios.get(process.env.VUE_APP_API_URL).then((response) => {
+      this.name = response.data.name;
+      this.time = response.data.time;
+    });
     console.log(this.name);
   },
 };

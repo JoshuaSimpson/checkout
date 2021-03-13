@@ -13,4 +13,7 @@ resource "aws_route53_record" "validation" {
   zone_id = var.zone_id
   records = [tolist(aws_acm_certificate.cert.domain_validation_options)[0].resource_record_value]
   ttl     = "60"
+  depends_on = [
+    aws_acm_certificate.cert
+  ]
 }

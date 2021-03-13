@@ -8,7 +8,7 @@ variable "domain" {
   type = "string"
 }
 
-variable "subdomain" {
+variable "api-subdomain" {
   default = "api"
   type = "string"
 }

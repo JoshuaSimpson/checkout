@@ -1,7 +1,7 @@
 [
   {
-    "name": "${service_name}",
-    "image": "${image}:latest",
+    "name": "api",
+    "image": "<IMAGE>:<VERSION>",
     "essential": true,
     "cpu": 10,
     "memory": 512,
@@ -16,15 +16,15 @@
     "environment": [
       {
         "name": "ENVIRONMENT",
-        "value": "${environment}"
+        "value": "<ENVIRONMENT>"
       }
     ],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "/ecs/${service_name}-${environment}",
-        "awslogs-stream-prefix": "${service_name}-${environment}-log-stream",
-        "awslogs-region": "${region}"
+        "awslogs-group": "/ecs/api-<ENVIRONMENT>",
+        "awslogs-stream-prefix": "api-<ENVIRONMENT>-log-stream",
+        "awslogs-region": "eu-west-1"
       }
     }
   }

@@ -23,7 +23,7 @@ data "aws_route53_zone" "selected" {
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "checkout-vpc"
+  name = "checkout-vpc-${local.environment}"
   cidr = "10.0.0.0/16"
 
   azs             = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
@@ -56,7 +56,7 @@ module "backend" {
   # DNS config
   zone_id = data.aws_route53_zone.selected.zone_id
   root_domain = data.aws_route53_zone.selected.name
-  subdomain = var.subdomain
+  subdomain = var.api-subdomain
   
   # Service config
   service_name = var.service_name
@@ -68,8 +68,7 @@ module "backend" {
 
 module "frontend" {
   source = "./frontend"
-
+  domain = "${local.environment}.${data.aws_route53_zone.selected.name}"
   environment = local.environment
   zone_id = data.aws_route53_zone.selected.zone_id
-  domain = data.aws_route53_zone.selected.name
 }

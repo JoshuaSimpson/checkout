@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "ecs_agent" {
 }
 
 resource "aws_iam_role" "ecs_agent" {
-  name               = "ecs-agent"
+  name               = "ecs-agent-${var.environment}"
   assume_role_policy = data.aws_iam_policy_document.ecs_agent.json
 }
 
@@ -21,7 +21,7 @@ resource "aws_iam_role_policy_attachment" "ecs_agent" {
 }
 
 resource "aws_iam_instance_profile" "ecs_agent" {
-  name = "ecs-agent"
+  name = "ecs-agent-${var.environment}"
   role = aws_iam_role.ecs_agent.name
 }
 
@@ -29,12 +29,12 @@ resource "aws_launch_configuration" "ecs_launch_config" {
     image_id             = "ami-0cdce788baec293cb"
     iam_instance_profile = aws_iam_instance_profile.ecs_agent.name
     security_groups      = [aws_security_group.ecs_sg.id]
-    user_data            = "#!/bin/bash\necho ECS_CLUSTER=${var.cluster_name} >> /etc/ecs/ecs.config"
     instance_type        = "t2.micro"
+    user_data            = "#!/bin/bash\necho ECS_CLUSTER=${var.cluster_name}-${var.environment} >> /etc/ecs/ecs.config"
 }
 
 resource "aws_autoscaling_group" "ecs_asg" {
-    name                      = "${var.cluster_name}-asg"
+    name                      = "${var.cluster_name}-${var.environment}-asg"
     vpc_zone_identifier       = var.subnets
     launch_configuration      = aws_launch_configuration.ecs_launch_config.name
 

@@ -1,5 +1,5 @@
 resource "aws_lb" "lb" {
-  name               = "${var.cluster_name}-alb"
+  name               = "${var.cluster_name}-${var.environment}-alb"
   load_balancer_type = "application"
   internal           = false
   security_groups    = [aws_security_group.lb_sg.id]
@@ -36,7 +36,7 @@ resource "aws_alb_listener" "https_listener" {
 }
 
 resource "aws_alb_target_group" "default-tg" {
-  name     = "${var.cluster_name}-default-tg"
+  name     = "${var.cluster_name}-${var.environment}-tg"
   port     = 443
   protocol = "HTTP"
   vpc_id   = var.vpc_id
