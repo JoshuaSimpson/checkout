@@ -15,7 +15,8 @@ if (process.env.ENVIRONMENT === 'local' || process.env.ENVIRONMENT === 'intervie
 }
 
 app.get('/', (req, res) => {
-  res.send(JSON.stringify({ name }));
+  let time = Date.now().toString();
+  res.send(JSON.stringify({ name, time }));
 })
 
 app.listen(port, () => {
